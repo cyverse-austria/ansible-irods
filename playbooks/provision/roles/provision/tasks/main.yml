@@ -43,3 +43,8 @@
   ansible.builtin.apt:
     name: "irods-database-plugin-postgres"
     state: present
+
+- name: Ensure iRODS does attempts to start on boot
+  ansible.builtin.service:
+    name: irods
+    enabled: true

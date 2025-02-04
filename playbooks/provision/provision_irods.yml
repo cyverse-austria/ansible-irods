@@ -5,10 +5,5 @@
   roles:
     - provision
 
-
-- name: Install ICAT Server
-  hosts: irods_catalog
-  become: true
-  roles:
-    - icat
-
+- name: Configure iRODS
+  import_playbook: cfg_irods.yml
