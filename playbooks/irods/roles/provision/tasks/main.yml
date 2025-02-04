@@ -49,3 +49,18 @@
     name: irods
     enabled: true
 
+- name: Create service group
+  ansible.builtin.group:
+    name: "{{ _irods_service_group_name }}"
+    system: true
+
+- name: Create service account
+  ansible.builtin.user:
+    name: "{{ _irods_service_account_name }}"
+    system: true
+    home: /var/lib/irods
+    createhome: true
+    group: "{{ _irods_service_group_name }}"
+    groups: tty
+    shell: /bin/bash
+    comment: iRODS Administrator
