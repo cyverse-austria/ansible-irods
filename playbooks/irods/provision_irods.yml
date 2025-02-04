@@ -37,6 +37,7 @@
         admin_password: "{{ _irods_admin_password }}"
         zone: "{{ _irods_zone_name }}"
 
+# only on resource server
 - name: Bootstrap iRODS start
   hosts: irods_resource:!irods_catalog
   become: "{{ _become_svc_acnt }}"
