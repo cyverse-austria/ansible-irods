@@ -34,8 +34,8 @@
         state: present
         host: "{{ groups['irods_catalog'][0] }}"
         port: "{{ _irods_zone_port }}"
-        admin_user: "{{ admin_user }}"
-        admin_password: "{{ admin_password }}"
+        admin_user: "{{ _irods_admin_username }}"
+        admin_password: "{{ _irods_admin_password }}"
         zone: "{{ _irods_zone_name }}"
 
 ###
