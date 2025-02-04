@@ -111,7 +111,7 @@
     #   vars:
     #     restart_op: if running
 
-    - name: Start iRODS
+    - name: restart iRODS
       irods_ctl:
         state: restarted_if_running
 
