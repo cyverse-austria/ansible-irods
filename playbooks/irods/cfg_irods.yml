@@ -111,14 +111,9 @@
     #   vars:
     #     restart_op: if running
 
-    - name: Ensure catalog service providers are started
-      hosts: irods_catalog
-      become: "{{ _become_svc_acnt }}"
-      become_user: "{{ _irods_service_account_name }}"
-      tasks:
-        - name: Start iRODS
-          irods_ctl:
-            state: restarted_if_running
+    - name: Start iRODS
+      irods_ctl:
+        state: restarted_if_running
 
   post_tasks:
     - name: Ensure the rule file is gone
