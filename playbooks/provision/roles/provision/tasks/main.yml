@@ -43,3 +43,33 @@
   ansible.builtin.apt:
     name: "irods-database-plugin-postgres"
     state: present
+
+
+################################################
+
+# Check if the ODBC driver is already installed
+- name: Check if ODBC driver is installed
+  ansible.builtin.stat:
+    path: /usr/lib/odbc/odbcinst.ini
+  register: odbc
+
+# Create setup configuration file if ODBC is not installed
+- name: Create setup configuration file
+  when: not odbc.stat.exists
+  ansible.builtin.template:
+    src: setup_configuration.json.j2
+    dest: /tmp/setup_configuration.json
+    mode: u+rw
+
+# Initialize ICAT schema
+- name: Initialize ICAT schema
+  when: not odbc.stat.exists
+  ansible.builtin.shell:
+    executable: /bin/bash
+    cmd: |
+      set -o errexit
+      python3 /var/lib/irods/scripts/setup_irods.py --stdout --test --verbose \
+        --json_configuration_file=/tmp/setup_configuration.json
+      rm --force /var/lib/irods/log/test_mode_output.log /tmp/setup_configuration.json || true
+  register: response
+  changed_when: response.stdout is search('Updating to schema version')
