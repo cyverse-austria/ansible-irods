@@ -1,0 +1,33 @@
+---
+
+# Service Account Info
+service_account_name: "irods"
+service_account_group: "irods"
+catalog_service_role: "catalog" # consumer
+
+# Database Connection Info (if applicable)
+odbc_driver: "PostgreSQL"
+db_host: "manual-db-amqp.cyverse.at"
+db_port: "5432"
+db_name: "ICAT"
+db_user: "irods"
+db_password: "JkhUjqFWB2MYKtjx"
+# stored_password_salt: "salt"
+
+# iRODS Server Options
+zone_name: "TUG"
+zone_port: "1247"
+parallel_port_range_begin: "20000"
+parallel_port_range_end: "30000"
+control_plane_port: "1248"
+schema_validation_base_uri: "file:///var/lib/irods/configuration_schemas"
+irods_admin_username: "rods"
+
+# Keys and Passwords
+zone_key: "GcPmFQAzL0BsYNhyxNefIz0Kn2AofTuvhfB2mfi3"
+negotiation_key: "U9ZG2ogCJmzQCd3AkDfYDz8yudJs5SRM"
+control_plane_key: "LyQwgXt1F2aTM6jlv3dBOs887PNYm9kA"
+irods_admin_password: "W5PHqYCd94Ymz69H"
+
+# Vault Directory
+# vault_directory: "/tmp/irods_vault"
