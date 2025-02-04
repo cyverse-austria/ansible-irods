@@ -70,12 +70,12 @@
     name: python-is-python3
     state: present
 
-- name: Ensure pip is installed (for Python 3)
+- name: Ensure pip is installed (for Python3)
   ansible.builtin.package:
     name: python3-pip
     state: present
 
-- name: Install python-irodsclient version 1.5.0
+- name: Install python-irodsclient
   ansible.builtin.pip:
     name: python-irodsclient=={{ python_irodsclient_version }}
     state: present
