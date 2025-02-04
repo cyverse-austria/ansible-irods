@@ -11,3 +11,11 @@
 
 - name: Configure iRODS
   import_playbook: cfg_irods.yml
+
+- name: Ensure catalog service providers are started
+  hosts: irods_catalog
+  become: "{{ _become_svc_acnt }}"
+  become_user: "{{ _irods_service_account_name }}"
+  tasks:
+    - name: Start iRODS
+      irods_ctl:
