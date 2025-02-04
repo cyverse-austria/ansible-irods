@@ -4,7 +4,6 @@
   become: true
   roles:
     - provision
-
   tasks:
     - name: Ensure iRODS ownership
       include_tasks: roles/provision/permissions/ensure_irods_ownership.yml

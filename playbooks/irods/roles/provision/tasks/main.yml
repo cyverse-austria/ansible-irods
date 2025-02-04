@@ -64,3 +64,14 @@
     groups: tty
     shell: /bin/bash
     comment: iRODS Administrator
+
+- name: Install python-is-python3
+  ansible.builtin.package:
+    name: python-is-python3
+    state: present
+
+- name: Install python-irodsclient version 1.5.0
+  ansible.builtin.pip:
+    name: python-irodsclient=={{ python_irodsclient_version }}
+    state: present
+
