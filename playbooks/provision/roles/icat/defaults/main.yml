@@ -1,5 +1,7 @@
 ---
 
+default_resource_name: "demoResc"
+
 # Service Account Info
 service_account_name: "irods"
 service_account_group: "irods"
