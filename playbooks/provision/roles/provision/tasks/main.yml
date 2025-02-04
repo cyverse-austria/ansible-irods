@@ -16,17 +16,6 @@
   ansible.builtin.apt:
     update_cache: yes
 
-# Install iRODS server with a specific version
-- name: Install iRODS server with specific version
-  ansible.builtin.apt:
-    name: "irods-server={{ irods_server_version }}"
-    state: present
-
-# Install iRODS PostgreSQL database plugin with a specific version
-- name: Install iRODS PostgreSQL database plugin with specific version
-  ansible.builtin.apt:
-    name: "irods-database-plugin-postgres={{ irods_db_plugin_version }}"
-    state: present
 
 # Lock iRODS packages to the specified version
 - name: Lock iRODS packages to required version
@@ -41,3 +30,16 @@
       Package: irods-*
       Pin: version {{ irods_version }}*
       Pin-Priority: 1001
+
+
+# Install iRODS server with a specific version
+- name: Install iRODS server with specific version
+  ansible.builtin.apt:
+    name: "irods-server"
+    state: present
+
+# Install iRODS PostgreSQL database plugin with a specific version
+- name: Install iRODS PostgreSQL database plugin with specific version
+  ansible.builtin.apt:
+    name: "irods-database-plugin-postgres"
+    state: present
