@@ -1,5 +1,5 @@
 ---
-- name: Install iRODS Repository on ICAT Server
+- name: Install iRODS Repository on all hosts of irods
   hosts: irods
   become: true
   roles:
@@ -9,9 +9,11 @@
     - name: Ensure iRODS ownership
       include_tasks: roles/provision/permissions/ensure_irods_ownership.yml
 
+# on all hosts of irods
 - name: Configure iRODS
   import_playbook: cfg_irods.yml
 
+# only on catalog server
 - name: Ensure catalog service providers are started
   hosts: irods_catalog
   become: "{{ _become_svc_acnt }}"
