@@ -5,9 +5,6 @@
   roles:
     - provision
 
-- name: Provision irods_catalog
-  hosts: irods_catalog
-  become: true
   tasks:
     - name: Ensure iRODS ownership
       include_tasks: roles/provision/permissions/ensure_irods_ownership.yml
