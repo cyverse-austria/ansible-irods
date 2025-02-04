@@ -5,8 +5,13 @@
   roles:
     - provision
 
-- name: Ensure iRODS ownership
-  ansible.builtin.import_tasks: tasks/ensure_irods_ownership.yml
+- name: Provision irods_catalog
+  hosts: irods_catalog
+  become: true
+  tasks:
+    # Optionally, you can still include somethinin.yml here manually if needed
+    - name: Ensure iRODS ownership
+      include_tasks: roles/provision/permissions/ensure_irods_ownership.yml
 
 - name: Configure iRODS
   import_playbook: cfg_irods.yml
