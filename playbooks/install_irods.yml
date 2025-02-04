@@ -1,0 +1,6 @@
+---
+- name: Install iRODS Repository on ICAT Server
+  hosts: icat_server
+  become: true
+  roles:
+    - provision
