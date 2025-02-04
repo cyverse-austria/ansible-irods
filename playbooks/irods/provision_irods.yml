@@ -9,7 +9,6 @@
   hosts: irods_catalog
   become: true
   tasks:
-    # Optionally, you can still include somethinin.yml here manually if needed
     - name: Ensure iRODS ownership
       include_tasks: roles/provision/permissions/ensure_irods_ownership.yml
 
