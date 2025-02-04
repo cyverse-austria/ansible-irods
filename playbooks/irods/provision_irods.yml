@@ -74,10 +74,10 @@
         admin_password: "{{ admin_password }}"
         zone: "{{ _irods_zone_name }}"
 
-    - name: Initialize resource server connection to catalog service providers
-      irods_clerver_auth:
-        provider: "{{ groups['irods_catalog'][0] }}"
-        password: "{{ _irods_clerver_password }}"
+    # - name: Initialize resource server connection to catalog service providers
+    #   irods_clerver_auth:
+    #     provider: "{{ groups['irods_catalog'][0] }}"
+    #     password: "{{ _irods_clerver_password }}"
 
-    - name: Start iRODS
-      irods_ctl:
+    # - name: Start iRODS
+    #   irods_ctl:
