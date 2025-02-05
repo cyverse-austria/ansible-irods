@@ -30,7 +30,7 @@
   hosts: irods_catalog
   become: true
   tasks:
-    - name: Ubuntu | install PostgreSQL 12 clients
+    - name: Install PostgreSQL 12 clients
       ansible.builtin.apt:
         update_cache: true
         name:
