@@ -2,5 +2,3 @@
 - name: cyverse.irods_cfg
   src: https://github.com/CyVerse-Ansible/ansible-irods-cfg
   version: 4.3.1
-
-- name: ansible.utils
