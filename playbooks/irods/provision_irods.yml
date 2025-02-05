@@ -8,6 +8,10 @@
     - name: Ensure iRODS ownership
       include_tasks: roles/provision/permissions/ensure_irods_ownership.yml
 
+# on all hosts
+- name: Update /etc/hosts
+  ansible.builtin.import_playbook: update_hosts.yml
+
 # on all hosts of irods
 - name: Configure iRODS
   import_playbook: cfg_irods.yml
@@ -74,6 +78,7 @@
         admin_user: "{{ admin_user }}"
         admin_password: "{{ admin_password }}"
         zone: "{{ _irods_zone_name }}"
+
 
     # - name: Initialize resource server connection to catalog service providers
     #   irods_clerver_auth:
