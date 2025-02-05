@@ -93,7 +93,7 @@
       ignore_errors: yes
 
     - name: Remove previous_version section from version.json
-      command: sed -i '/"previous_version": {/,/}/d' /var/lib/irods/version.json
+      command: "sed -i '/\"previous_version\": {/,/}/d' /var/lib/irods/version.json"
       ignore_errors: yes
 
     - name: Run iinit with password
