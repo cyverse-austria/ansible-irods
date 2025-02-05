@@ -97,7 +97,7 @@
       ignore_errors: yes
 
     - name: Run iinit with password
-      command: "echo {{ admin_password }} | iinit -f"
+      command: "echo {{ admin_password }} | iinit"
       ignore_errors: yes 
 
     - name: Start iRODS (second attempt)
@@ -106,7 +106,7 @@
       ignore_errors: yes 
 
     - name: Run iinit with password
-      command: "echo {{ admin_password }} | iinit -f"
+      command: "echo {{ admin_password }} | iinit"
       register: iinit_result
       failed_when: iinit_result.rc != 0
 
