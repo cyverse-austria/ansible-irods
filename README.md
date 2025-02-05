@@ -12,3 +12,10 @@ ansible-playbook --inventory $INVENTORY_DIR/ --user=root playbooks/irods/provisi
 ```
 
 
+## resource server
+* ./irodsctl start - failing is ok
+* sed -i '/"previous_version": {/,/}/d' /var/lib/irods/version.json
+* iinit 
+* ./irodsctl start
+* iinit
+* ./irodsctl restart
