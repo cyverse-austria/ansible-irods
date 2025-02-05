@@ -103,6 +103,7 @@
     - name: Start iRODS (second attempt)
       irods_ctl:
         state: started
+      ignore_errors: yes 
 
     - name: Run iinit with password
       command: "echo {{ admin_password }} | iinit -f"
