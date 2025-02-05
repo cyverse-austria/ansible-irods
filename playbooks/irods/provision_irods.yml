@@ -26,6 +26,19 @@
       irods_ctl:
 
 # only on catalog server
+- name: install with root
+  hosts: irods_catalog
+  become: true
+  tasks:
+    - name: Ubuntu | install PostgreSQL 12 clients
+      ansible.builtin.apt:
+        update_cache: true
+        name:
+          - odbc-postgresql
+          - postgresql-client-12
+        state: present
+
+# only on catalog server
 - name: Create required groups
   hosts: irods_catalog
   become: "{{ _become_svc_acnt }}"
