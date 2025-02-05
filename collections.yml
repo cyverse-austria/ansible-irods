@@ -1,3 +1,4 @@
+# for now only update_hosts.yml needs it
 ---
 collections:
   - name: ansible.posix
