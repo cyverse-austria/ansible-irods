@@ -58,7 +58,7 @@
         irods_cfg_default_number_of_transfer_threads: >-
           {{ _irods_default_number_of_transfer_threads }}
         irods_cfg_default_resource_directory: "{{ _irods_default_vault }}"
-        irods_cfg_default_resource_name: "{{ _irods_default_resource }}"
+        irods_cfg_default_resource_name: "demoResc", # "{{ _irods_default_resource }}"
         irods_cfg_environment_variables: >-
           {{ {'IRODS_AMQP_URI': amqp_uri} if is_provider | bool else {} }}
         irods_cfg_federation: "{{ _irods_federation }}"
@@ -103,8 +103,8 @@
         irods_cfg_zone_port: "{{ _irods_zone_port }}"
         irods_cfg_zone_user: "{{ _irods_clerver_user }}"
         irods_cfg_zone_password: "{{ _irods_clerver_password }}"
-        irods_cfg_default_resource_directory: "/var/lib/irods/Vault"
-        irods_cfg_client_api_allowlist_policy: "enforce"
+        # irods_cfg_default_resource_directory: "/var/lib/irods/Vault"
+        # irods_cfg_client_api_allowlist_policy: "enforce"
         # irods_cfg_client_authentication_scheme: "pam_password" # requires SSL
 
     - name: Restart iRODS
