@@ -14,10 +14,8 @@
 - name: Configure iRODS
   import_playbook: cfg_irods.yml
 
-# catalog
 - name: Provision Catalog
   ansible.builtin.import_playbook: catalog.yml
 
-# Resource
 - name: Provision Resource
   ansible.builtin.import_playbook: resource.yml
