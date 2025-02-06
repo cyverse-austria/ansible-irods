@@ -19,3 +19,12 @@ ansible-playbook --inventory $INVENTORY_DIR/ --user=root playbooks/irods/provisi
 * ./irodsctl start
 * iinit
 * ./irodsctl restart
+
+
+
+# TODO
+
+    # # TODO:
+    # create irods account for de-irods
+    # iadmin mkuser de-irods rodsadmin
+    # iadmin moduser de-irods password PASSWORD

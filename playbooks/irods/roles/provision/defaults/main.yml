@@ -1,5 +1,0 @@
----
-irods_repo_url: "https://packages.irods.org/apt/"
-repo_key_url: "https://packages.irods.org/irods-signing-key.asc"
-irods_version: "4.3.1"
-python_irodsclient_version: "3.0.0"

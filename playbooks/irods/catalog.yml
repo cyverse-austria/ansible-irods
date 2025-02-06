@@ -1,0 +1,36 @@
+---
+- name: Ensure catalog service providers are started
+  hosts: irods_catalog
+  become: "{{ _become_svc_acnt }}"
+  become_user: "{{ _irods_service_account_name }}"
+  tasks:
+    - name: Start iRODS
+      irods_ctl:
+
+# - name: install with root
+#   hosts: irods_catalog
+#   become: true
+#   tasks:
+#     - name: Install PostgreSQL 12 clients
+#       ansible.builtin.apt:
+#         update_cache: true
+#         name:
+#           - odbc-postgresql
+#           - postgresql-client-12
+#         state: present
+
+- name: Create required groups
+  hosts: irods_catalog
+  become: "{{ _become_svc_acnt }}"
+  become_user: "{{ _irods_service_account_name }}"
+  tasks:
+    - name: create rodsadmin group
+      irods_group:
+        group: rodsadmin
+        state: present
+        host: "{{ groups['irods_catalog'][0] }}"
+        port: "{{ _irods_zone_port }}"
+        admin_user: "{{ _irods_admin_username }}"
+        admin_password: "{{ _irods_admin_password }}"
+        zone: "{{ _irods_zone_name }}"
+
