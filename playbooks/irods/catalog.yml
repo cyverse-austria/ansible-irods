@@ -34,3 +34,82 @@
         admin_password: "{{ _irods_admin_password }}"
         zone: "{{ _irods_zone_name }}"
 
+
+
+###########
+
+- name: Provision additional for catalog service providers
+  hosts: irods_catalog
+  become: true
+  # vars:
+  #   odbc_description: >-
+  #     {{ lookup('ini', 'Description file=files/postgresql-odbc-tmpl.ini section=PostgreSQL') }}
+  #   odbc_driver: >-
+  #     {{ lookup('ini', 'Driver file=files/postgresql-odbc-tmpl.ini section=PostgreSQL') }}
+  #   odbc_setup: >-
+  #     {{ lookup('ini', 'Setup file=files/postgresql-odbc-tmpl.ini section=PostgreSQL') }}
+  tasks:
+    # - name: Configure linux kernel
+    #   ansible.posix.sysctl:
+    #     name: kernel.{{ item.name }}
+    #     value: "{{ item.value }}"
+    #   with_items: "{{ _sysctl_kernel }}"
+    #   tags:
+    #     - no_testing
+
+    - name: Ensure parallel is installed
+      ansible.builtin.package:
+        name: parallel
+        state: present
+
+    - name: Ensure pika installed
+      ansible.builtin.pip:
+        name: pika>=1.2
+        state: present
+
+    - name: Provision Ubuntu
+      when: ansible_distribution == 'Ubuntu'
+      block:
+        - name: Ubuntu | install mail client
+          ansible.builtin.package:
+            name: bsd-mailx
+            state: present
+
+        - name: Ubuntu | add PostgreSQL repository key
+          ansible.builtin.apt_key:
+            url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+            state: present
+
+        - name: Ubuntu | configure PostgreSQL repository
+          ansible.builtin.copy:
+            dest: /etc/apt/sources.list.d/pgdg.list
+            mode: '0644'
+            content: >
+              deb https://apt.postgresql.org/pub/repos/apt/ {{ ansible_lsb.codename }}-pgdg main
+
+        - name: Ubuntu | install PostgreSQL 12 clients
+          ansible.builtin.apt:
+            update_cache: true
+            name:
+              - odbc-postgresql
+              - postgresql-client-12
+            state: present
+
+
+- name: Start iRODS on catalog service providers
+  hosts: irods_catalog
+  become: "{{ _become_svc_acnt }}"
+  become_user: "{{ _irods_service_account_name }}"
+  become_flags: "-i"
+  gather_facts: false
+  tasks:
+    - name: Start iRODS
+      irods_ctl:
+
+    - name: Authenticate clerver
+      irods_clerver_auth:
+        provider: "{{ inventory_hostname }}"
+        password: "{{ _irods_clerver_password }}"
+
+- name: Perform run-time configuration
+  ansible.builtin.import_playbook: irods_runtime_init.yml
