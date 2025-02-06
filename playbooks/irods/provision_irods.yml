@@ -1,15 +1,6 @@
 ---
-- name: Install iRODS Repository on all hosts of irods
-  hosts: irods
-  become: true
-  roles:
-    - provision
-  tasks:
-    - name: Ensure iRODS ownership
-      include_tasks: roles/provision/permissions/ensure_irods_ownership.yml
-
-- name: Update /etc/hosts
-  ansible.builtin.import_playbook: update_hosts.yml
+- name: Provision irods
+  ansible.builtin.import_playbook: provision.yml
 
 - name: Configure iRODS
   import_playbook: cfg_irods.yml
