@@ -58,7 +58,7 @@
         irods_cfg_default_number_of_transfer_threads: >-
           {{ _irods_default_number_of_transfer_threads }}
         irods_cfg_default_resource_directory: "{{ _irods_default_vault }}"
-        irods_cfg_default_resource_name: "demoResc",
+        irods_cfg_default_resource_name: "demoResc" # "{{ _irods_default_resource }}"
         irods_cfg_environment_variables: >-
           {{ {'IRODS_AMQP_URI': amqp_uri} if is_provider | bool else {} }}
         irods_cfg_federation: "{{ _irods_federation }}"
