@@ -25,7 +25,7 @@ ansible-playbook --inventory $INVENTORY_DIR/ --user=root playbooks/irods/provisi
 
 # TODO
 
-    # # TODO:
+    # # TODO: create a task on - irods_runtime_init.yml
     # # create irods account for de-irods
     # iadmin mkuser de-irods rodsadmin
     # iadmin moduser de-irods password kmOdwrybisdRPY1M
