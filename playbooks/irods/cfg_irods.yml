@@ -103,6 +103,8 @@
         irods_cfg_zone_port: "{{ _irods_zone_port }}"
         irods_cfg_zone_user: "{{ _irods_clerver_user }}"
         irods_cfg_zone_password: "{{ _irods_clerver_password }}"
+        irods_cfg_default_resource_directory: "/var/lib/irods/Vault"
+        irods_cfg_client_api_allowlist_policy: "enforce"
         # irods_cfg_client_authentication_scheme: "pam_password" # requires SSL
 
     - name: Restart iRODS
