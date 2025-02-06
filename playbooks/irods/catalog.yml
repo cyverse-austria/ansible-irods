@@ -67,6 +67,12 @@
         name: pika>=1.2
         state: present
 
+    - name: Ensure jq is installed
+      apt:
+        name: jq
+        state: present
+        update_cache: yes
+
     - name: Provision Ubuntu
       when: ansible_distribution == 'Ubuntu'
       block:
@@ -94,7 +100,6 @@
               - odbc-postgresql
               - postgresql-client-12
             state: present
-
 
 - name: Start iRODS on catalog service providers
   hosts: irods_catalog
