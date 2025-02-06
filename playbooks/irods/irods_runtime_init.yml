@@ -136,6 +136,23 @@
         - /{{ _irods_zone_name }}/home
         - /{{ _irods_zone_name }}/home/shared
 
+    - name: Ensure de-irods user has read access to required collections
+      delegate_to: localhost
+      become: false
+      irods_permission:
+        subject: de-irods
+        permission: read
+        object: "{{ item }}"
+        host: "{{ groups['irods_catalog'][0] }}"
+        port: "{{ _irods_zone_port }}"
+        admin_user: "{{ _irods_clerver_user }}"
+        admin_password: "{{ _irods_clerver_password }}"
+        zone: "{{ _irods_zone_name }}"
+      with_items:
+        - /{{ _irods_zone_name }}
+        - /{{ _irods_zone_name }}/home
+        - /{{ _irods_zone_name }}/home/shared
+
     - name: Start periodic policies
       environment:
         IRODS_AUTHENTICATION_FILE: /var/lib/irods/.irods/.a-adm
