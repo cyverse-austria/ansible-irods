@@ -8,126 +8,16 @@
     - name: Ensure iRODS ownership
       include_tasks: roles/provision/permissions/ensure_irods_ownership.yml
 
-# on all hosts
 - name: Update /etc/hosts
   ansible.builtin.import_playbook: update_hosts.yml
 
-# on all hosts of irods
 - name: Configure iRODS
   import_playbook: cfg_irods.yml
 
-# only on catalog server
-- name: Ensure catalog service providers are started
-  hosts: irods_catalog
-  become: "{{ _become_svc_acnt }}"
-  become_user: "{{ _irods_service_account_name }}"
-  tasks:
-    - name: Start iRODS
-      irods_ctl:
+# catalog
+- name: Provision Catalog
+  ansible.builtin.import_playbook: catalog.yml
 
-# # only on catalog server
-# - name: install with root
-#   hosts: irods_catalog
-#   become: true
-#   tasks:
-#     - name: Install PostgreSQL 12 clients
-#       ansible.builtin.apt:
-#         update_cache: true
-#         name:
-#           - odbc-postgresql
-#           - postgresql-client-12
-#         state: present
-
-# only on catalog server
-- name: Create required groups
-  hosts: irods_catalog
-  become: "{{ _become_svc_acnt }}"
-  become_user: "{{ _irods_service_account_name }}"
-  tasks:
-    - name: create rodsadmin group
-      irods_group:
-        group: rodsadmin
-        state: present
-        host: "{{ groups['irods_catalog'][0] }}"
-        port: "{{ _irods_zone_port }}"
-        admin_user: "{{ _irods_admin_username }}"
-        admin_password: "{{ _irods_admin_password }}"
-        zone: "{{ _irods_zone_name }}"
-
-# only on resource server
-- name: Bootstrap iRODS start
-  hosts: irods_resource:!irods_catalog
-  become: "{{ _become_svc_acnt }}"
-  become_user: "{{ _irods_service_account_name }}"
-  become_flags: '-i'
-  vars:
-    admin_user: "{{ hostvars[groups['irods_catalog'][0]]['_irods_clerver_user'] }}"
-    admin_password: "{{ hostvars[groups['irods_catalog'][0]]['_irods_clerver_password'] }}"
-  tasks:
-    - name: Create clerver user
-      delegate_to: localhost
-      become: false
-      irods_user:
-        name: "{{ _irods_clerver_user }}"
-        type: rodsadmin
-        state: present
-        password: "{{ _irods_clerver_password }}"
-        host: "{{ groups['irods_catalog'][0] }}"
-        port: "{{ _irods_zone_port }}"
-        admin_user: "{{ admin_user }}"
-        admin_password: "{{ admin_password }}"
-        zone: "{{ _irods_zone_name }}"
-
-    - name: Ensure clerver user is in group rodsadmin
-      delegate_to: localhost
-      become: false
-      irods_group_member:
-        group: rodsadmin
-        users:
-          - "{{ _irods_clerver_user }}"
-        state: present
-        host: "{{ groups['irods_catalog'][0] }}"
-        port: "{{ _irods_zone_port }}"
-        admin_user: "{{ admin_user }}"
-        admin_password: "{{ admin_password }}"
-        zone: "{{ _irods_zone_name }}"
-
-
-    # - name: Initialize resource server connection to catalog service providers
-    #   irods_clerver_auth:
-    #     provider: "{{ groups['irods_catalog'][0] }}"
-    #     password: "{{ _irods_clerver_password }}"
-
-    # - name: Start iRODS
-    #   irods_ctl:
-
-########################################
-### These task are workaround to issue 
-### previous_version
-########################################
-    # - name: Start iRODS (first attempt)
-    #   irods_ctl:
-    #     state: started
-    #   ignore_errors: yes
-
-    # - name: Remove previous_version section from version.json
-    #   command: "sed -i '/\"previous_version\": {/,/}/d' /var/lib/irods/version.json"
-    #   ignore_errors: yes
-
-    # - name: Run iinit with password
-    #   command: "echo {{ admin_password }} | iinit"
-    #   ignore_errors: yes 
-
-    # - name: Start iRODS (second attempt)
-    #   irods_ctl:
-    #     state: started
-    #   ignore_errors: yes 
-
-    # - name: Run iinit with password
-    #   command: "echo {{ admin_password }} | iinit"
-    #   register: iinit_result
-    #   failed_when: iinit_result.rc != 0
-
-    # - name: restart iRODS
-    #   irods_ctl:
-    #     state: restarted_if_running
+# Resource
+- name: Provision Resource
+  ansible.builtin.import_playbook: resource.yml
