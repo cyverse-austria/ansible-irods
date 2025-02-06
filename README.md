@@ -6,7 +6,8 @@ Installing iRODS `4.3.1` on Ubuntu `22.04`
 ## run playbooks
 ```bash
 # install requirements
-ansible-galaxy install -r .yml
+ansible-galaxy install -r requirements.yml
+ansible-galaxy install --force -r collections.yml
 
 ansible-playbook --inventory $INVENTORY_DIR/ --user=root playbooks/irods/provision_irods.yml
 ```
@@ -25,6 +26,7 @@ ansible-playbook --inventory $INVENTORY_DIR/ --user=root playbooks/irods/provisi
 # TODO
 
     # # TODO:
-    # create irods account for de-irods
+    # # create irods account for de-irods
     # iadmin mkuser de-irods rodsadmin
-    # iadmin moduser de-irods password PASSWORD
+    # iadmin moduser de-irods password kmOdwrybisdRPY1M
+    # iadmin atg rodsadmin de-irods
