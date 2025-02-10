@@ -29,6 +29,8 @@ ansible-playbook --inventory $INVENTORY_DIR/ --user=root playbooks/irods/provisi
     # # create irods account for de-irods
     # iadmin mkuser de-irods rodsadmin
     # iadmin moduser de-irods password kmOdwrybisdRPY1M
+
+    ## add de-irods to the rodsadmin group 
     # iadmin atg rodsadmin de-irods
 
     # # rodsadmin should own /TUG/home/shared
