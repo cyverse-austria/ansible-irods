@@ -25,7 +25,7 @@ ansible-playbook --inventory $INVENTORY_DIR/ --user=root playbooks/irods/provisi
 
 # TODO
 
-User: fakeuser
+User: newadmin
 Pass: mojibwali
 
 
@@ -48,3 +48,11 @@ Pass: mojibwali
     # \c ICAT
     # GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA "public" TO icat_reader;
 
+
+
+## After register a new user in data you get
+```bash
+Error Code= ERR_ILLEGAL_ARGUMENT
+Reason = "java.lang.IllegalArgumentException: Invalid UUID string: "
+User = newadmin
+```
