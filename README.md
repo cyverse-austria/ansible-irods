@@ -25,6 +25,10 @@ ansible-playbook --inventory $INVENTORY_DIR/ --user=root playbooks/irods/provisi
 
 # TODO
 
+User: fakeuser
+Pass: mojibwali
+
+
     # # TODO: create a task on - irods_runtime_init.yml
     # # create irods account for de-irods
     # iadmin mkuser de-irods rodsadmin
@@ -35,6 +39,10 @@ ansible-playbook --inventory $INVENTORY_DIR/ --user=root playbooks/irods/provisi
 
     # # rodsadmin should own /TUG/home/shared
     # ichmod own rodsadmin /TUG/home/shared
+
+    # # portal user irods
+    # iadmin mkuser portal rodsadmin
+    # iadmin moduser portal password ksasagrybisdRPY1M
 
     # # add this to database deployment
     # \c ICAT
