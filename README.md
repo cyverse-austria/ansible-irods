@@ -30,3 +30,6 @@ ansible-playbook --inventory $INVENTORY_DIR/ --user=root playbooks/irods/provisi
     # iadmin mkuser de-irods rodsadmin
     # iadmin moduser de-irods password kmOdwrybisdRPY1M
     # iadmin atg rodsadmin de-irods
+
+    # # rodsadmin should own /TUG/home/shared
+    # ichmod own rodsadmin /TUG/home/shared
