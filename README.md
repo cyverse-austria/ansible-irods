@@ -35,3 +35,8 @@ ansible-playbook --inventory $INVENTORY_DIR/ --user=root playbooks/irods/provisi
 
     # # rodsadmin should own /TUG/home/shared
     # ichmod own rodsadmin /TUG/home/shared
+
+    # # add this to database deployment
+    # \c ICAT
+    # GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA "public" TO icat_reader;
+
