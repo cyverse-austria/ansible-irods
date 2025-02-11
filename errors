@@ -4,7 +4,7 @@ cat /var/lib/irods/log/
 
 
 
-
+## https://github.com/irods/irods/blob/d76d7a439d146fe63afefe93aca3ae5336ff5a92/scripts/irods/upgrade_configuration.py#L122
 root@manual-res02:~# cat /var/lib/irods/log/control_log.txt 
 2025-02-05T17:57:57.498Z -   DEBUG -                  controller.py:  63 - Calling start on IrodsController
 2025-02-05T17:57:57.499Z -   DEBUG -       upgrade_configuration.py:  81 - Upgrading from version 4.1.0 to version 4.3.1.
