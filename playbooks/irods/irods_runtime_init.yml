@@ -136,9 +136,6 @@
         - /{{ _irods_zone_name }}/home
         - /{{ _irods_zone_name }}/home/shared
 
-    - name: prepare iRODS for DE
-      ansible.builtin.import_tasks: tasks/de.yml
-
     - name: Start periodic policies
       environment:
         IRODS_AUTHENTICATION_FILE: /var/lib/irods/.irods/.a-adm

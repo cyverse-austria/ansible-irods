@@ -8,8 +8,8 @@
     state: present
     host: "{{ groups['irods_catalog'][0] }}"
     port: "{{ _irods_zone_port }}"
-    admin_user: "{{ _irods_clerver_user }}"
-    admin_password: "{{ _irods_clerver_password }}"
+    admin_user: "{{ admin_user }}"
+    admin_password: "{{ admin_password }}"
     zone: "{{ _irods_zone_name }}"
 
 - name: Ensure portal user exists
@@ -21,8 +21,8 @@
     state: present
     host: "{{ groups['irods_catalog'][0] }}"
     port: "{{ _irods_zone_port }}"
-    admin_user: "{{ _irods_clerver_user }}"
-    admin_password: "{{ _irods_clerver_password }}"
+    admin_user: "{{ admin_user }}"
+    admin_password: "{{ admin_password }}"
     zone: "{{ _irods_zone_name }}"
 
 - name: Ensure de-irods & portal user is in group rodsadmin
@@ -48,7 +48,7 @@
     object: "{{ item }}"
     host: "{{ groups['irods_catalog'][0] }}"
     port: "{{ _irods_zone_port }}"
-    admin_user: "{{ _irods_clerver_user }}"
-    admin_password: "{{ _irods_clerver_password }}"
+    admin_user: "{{ admin_user }}"
+    admin_password: "{{ admin_password }}"
   with_items:
     - /{{ _irods_zone_name }}/home/shared

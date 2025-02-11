@@ -22,6 +22,9 @@
         admin_password: "{{ admin_password }}"
         zone: "{{ _irods_zone_name }}"
 
+    - name: prepare iRODS for DE
+      ansible.builtin.import_tasks: tasks/de.yml
+
     - name: Ensure clerver user is in group rodsadmin
       delegate_to: localhost
       become: false
