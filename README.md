@@ -14,7 +14,6 @@ ansible-playbook --inventory $INVENTORY_DIR/ --user=root playbooks/irods/provisi
 
 
 ## resource server
-
 * ./irodsctl start - failing is ok
 * sed -i '/"previous_version": {/,/}/d' /var/lib/irods/version.json
 * iinit 
@@ -24,10 +23,30 @@ ansible-playbook --inventory $INVENTORY_DIR/ --user=root playbooks/irods/provisi
 
 
 
-## error on created user
+## After deployment steps:
+```bash
+# # create irods account for de-irods
+iadmin mkuser de-irods rodsadmin
+iadmin moduser de-irods password kmOdwrybisdRPY1M
+
+## add de-irods to the rodsadmin group 
+iadmin atg rodsadmin de-irods
+
+## rodsadmin should own /TUG/home/shared
+ichmod own rodsadmin /TUG/home/shared
+
+# # portal user irods
+iadmin mkuser portal rodsadmin
+iadmin moduser portal password ksasagrybisdRPY1M
+
+# # add this to database deployment
+# \c ICAT
+# GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA "public" TO icat_reader;
+```
+
+
 
 **After register a new user in data you get**
-
 ```bash
 Error Code= ERR_ILLEGAL_ARGUMENT
 Reason = "java.lang.IllegalArgumentException: Invalid UUID string: "

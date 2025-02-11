@@ -35,9 +35,9 @@
         admin_user: "{{ admin_user }}"
         admin_password: "{{ admin_password }}"
         zone: "{{ _irods_zone_name }}"
-        
-    - name: prepare iRODS for DE
-      ansible.builtin.import_tasks: tasks/de.yml
+
+    # - name: prepare iRODS for DE
+    #   ansible.builtin.import_tasks: tasks/de.yml
 
     # - name: Initialize resource server connection to catalog service providers
     #   irods_clerver_auth:
