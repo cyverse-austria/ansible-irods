@@ -39,6 +39,9 @@ ichmod own rodsadmin /TUG/home/shared
 iadmin mkuser portal rodsadmin
 iadmin moduser portal password ksasagrybisdRPY1M
 
+## add portal to the rodsadmin group 
+iadmin atg rodsadmin portal
+
 # # add this to database deployment
 # \c ICAT
 # GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA "public" TO icat_reader;
