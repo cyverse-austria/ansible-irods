@@ -40,3 +40,17 @@
     admin_user: "{{ _irods_clerver_user }}"
     admin_password: "{{ _irods_clerver_password }}"
     zone: "{{ _irods_zone_name }}"
+
+- name: Give rodsadmin group own permission on /home/shared collection
+  irods_permission:
+    zone: "{{ _irods_zone_name }}"
+    subject: rodsadmin
+    permission: own
+    object: "{{ item }}"
+    host: "{{ groups['irods_catalog'][0] }}"
+    port: "{{ _irods_zone_port }}"
+    admin_user: "{{ _irods_clerver_user }}"
+    admin_password: "{{ _irods_clerver_password }}"
+  with_items:
+    - /
+    - /{{ _irods_zone_name }}/home/shared
