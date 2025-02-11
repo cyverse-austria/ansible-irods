@@ -12,3 +12,31 @@
     admin_password: "{{ _irods_clerver_password }}"
     zone: "{{ _irods_zone_name }}"
 
+- name: Ensure portal user exists
+  delegate_to: localhost
+  become: false
+  irods_user:
+    name: portal
+    password: "{{ portal_user_password }}"
+    state: present
+    host: "{{ groups['irods_catalog'][0] }}"
+    port: "{{ _irods_zone_port }}"
+    admin_user: "{{ _irods_clerver_user }}"
+    admin_password: "{{ _irods_clerver_password }}"
+    zone: "{{ _irods_zone_name }}"
+
+
+- name: Ensure de-irods & portal user is in group rodsadmin
+  delegate_to: localhost
+  become: false
+  irods_group_member:
+    group: rodsadmin
+    users:
+      - "de-irods"
+      - "portal"
+    state: present
+    host: "{{ groups['irods_catalog'][0] }}"
+    port: "{{ _irods_zone_port }}"
+    admin_user: "{{ _irods_clerver_user }}"
+    admin_password: "{{ _irods_clerver_password }}"
+    zone: "{{ _irods_zone_name }}"

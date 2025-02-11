@@ -37,12 +37,13 @@ Pass: mojibwali
     ## add de-irods to the rodsadmin group 
     # iadmin atg rodsadmin de-irods
 
-    # # rodsadmin should own /TUG/home/shared
-    # ichmod own rodsadmin /TUG/home/shared
-
     # # portal user irods
     # iadmin mkuser portal rodsadmin
     # iadmin moduser portal password ksasagrybisdRPY1M
+
+###########################
+    # # rodsadmin should own /TUG/home/shared
+    # ichmod own rodsadmin /TUG/home/shared
 
     # # add this to database deployment
     # \c ICAT
