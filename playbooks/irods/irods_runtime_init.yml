@@ -106,19 +106,6 @@
             - /{{ _irods_zone_name }}/home
             - /{{ _irods_zone_name }}/trash/home
 
-    # - name: Ensure de-irods user exists
-    #   delegate_to: localhost
-    #   become: false
-    #   irods_user:
-    #     name: de-irods
-    #     password: "{{ de_irods_password }}" 'kmOdwrybisdRPY1M'  # make it via vars
-    #     state: present
-    #     host: "{{ groups['irods_catalog'][0] }}"
-    #     port: "{{ _irods_zone_port }}"
-    #     admin_user: "{{ _irods_clerver_user }}"
-    #     admin_password: "{{ _irods_clerver_password }}"
-    #     zone: "{{ _irods_zone_name }}"
-
     - name: Ensure anonymous user exists
       delegate_to: localhost
       become: false
@@ -149,22 +136,8 @@
         - /{{ _irods_zone_name }}/home
         - /{{ _irods_zone_name }}/home/shared
 
-    # - name: Ensure de-irods user has read access to required collections
-    #   delegate_to: localhost
-    #   become: false
-    #   irods_permission:
-    #     subject: de-irods
-    #     permission: read
-    #     object: "{{ item }}"
-    #     host: "{{ groups['irods_catalog'][0] }}"
-    #     port: "{{ _irods_zone_port }}"
-    #     admin_user: "{{ _irods_clerver_user }}"
-    #     admin_password: "{{ _irods_clerver_password }}"
-    #     zone: "{{ _irods_zone_name }}"
-    #   with_items:
-    #     - /{{ _irods_zone_name }}
-    #     - /{{ _irods_zone_name }}/home
-    #     - /{{ _irods_zone_name }}/home/shared
+    - name: prepare iRODS for DE
+      ansible.builtin.import_tasks: tasks/de.yml
 
     - name: Start periodic policies
       environment:
