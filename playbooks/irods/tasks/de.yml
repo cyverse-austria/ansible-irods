@@ -52,5 +52,4 @@
     admin_user: "{{ _irods_clerver_user }}"
     admin_password: "{{ _irods_clerver_password }}"
   with_items:
-    - /
     - /{{ _irods_zone_name }}/home/shared
